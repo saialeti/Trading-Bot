@@ -90,6 +90,8 @@ def place_trade():
         print("❌ Error placing trade:", e)
         return jsonify({"error": str(e)}), 500
 
+# === For local and Render deployment ===
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000)
+    port = int(os.environ.get("PORT", 3000))  # Render sets PORT env variable
+    app.run(host='0.0.0.0', port=port)
 
