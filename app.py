@@ -42,7 +42,7 @@ def place_trade():
 
         instrument_id = tl.get_instrument_id_from_symbol_name(symbol_name)
 
-        # Place limit order
+        # Option 1: Remove position_netting for limit orders
         order_id = tl.create_order(
             instrument_id=instrument_id,
             quantity=lot_size,
@@ -54,11 +54,9 @@ def place_trade():
             take_profit_type="absolute",
             stop_loss=sl_price,
             stop_loss_type="absolute"
-            
         )
 
         
-
         if order_id:
             print(f"✅ Limit Order Placed: {order_id}")
             return jsonify({
