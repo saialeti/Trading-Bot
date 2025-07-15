@@ -42,7 +42,7 @@ def place_trade():
 
         instrument_id = tl.get_instrument_id_from_symbol_name(symbol_name)
 
-        # Option 1: Remove position_netting for limit orders
+        # Place limit order
         order_id = tl.create_order(
             instrument_id=instrument_id,
             quantity=lot_size,
@@ -54,22 +54,10 @@ def place_trade():
             take_profit_type="absolute",
             stop_loss=sl_price,
             stop_loss_type="absolute"
-            # position_netting=True  # Remove this line
+            
         )
 
-        # Option 2: Use market order if you need position netting
-        # order_id = tl.create_order(
-        #     instrument_id=instrument_id,
-        #     quantity=lot_size,
-        #     side=signal,
-        #     type_="market",
-        #     validity="IOC",  # Market orders must use IOC
-        #     take_profit=tp_price,
-        #     take_profit_type="absolute",
-        #     stop_loss=sl_price,
-        #     stop_loss_type="absolute",
-        #     position_netting=True
-        # )
+        
 
         if order_id:
             print(f"✅ Limit Order Placed: {order_id}")
